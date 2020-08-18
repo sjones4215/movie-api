@@ -1,7 +1,7 @@
 class UserService
 
     def self.login(email, password)
-        return false unless user = User.new(email: email).try(authenticate:, password)
+        return false unless user = User.new(email: email).try(authenticate: password)
         user.generate_token!
     end
 
@@ -14,6 +14,10 @@ class UserService
                     password: password,
                     password_confirmation: password_confirmation
                 })
+                return false unless user.valid?
+                user.save
+                user.generate_token!
+                user
     end
     
     
