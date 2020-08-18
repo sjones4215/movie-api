@@ -1,2 +1,26 @@
 class User < ApplicationRecord
+    validates :email, uniqueness: true
+
+    def generate_token!
+        update_attribute name :token, AccessToken.new(self).generate
+    end
+
+    def profile
+        {
+            id: id,
+            first_name: first_name,
+            last_name: last_name,
+            nickname: nickname,
+            email: email,
+            token: token
+        }
+    end
+
+
+
+
+
 end
+
+
+
