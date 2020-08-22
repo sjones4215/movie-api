@@ -30,4 +30,10 @@ module MovieApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
   end
-end
+    
+  env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    if File.exist(env_file)
+      YAMl.load(File.open(env_file)).each do |key,value|
+        ENV(key.to_s) = value
+      end
+    end

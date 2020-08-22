@@ -30,6 +30,12 @@ class Api::V1::MoviesController < ApplicationController
     def destroy
         @movie.destroy
     end
+    
+    def get_upload_credentials
+        @accessKey = ENV('S3_ACCESS')
+        @secretKey = ENV('S3_SECRET')
+        render json: { accessKey: @accessKey, secretKey: @secretKey }
+    end
 
     private
 
