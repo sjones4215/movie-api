@@ -12,6 +12,5 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+/config/locales/local_env.yml
 .byebug_history
-config/loacal_env.rb
