@@ -1,6 +1,7 @@
 class Api::V1::MoviesController < ApplicationController
-    before :set_movie
+    before :set_movie, only:[:show,:update,:destroy]
     skip_before_action name :authenticate, only: [:index, :show]
+    
     def index
         @movies = Movie.all
         render json: @movies

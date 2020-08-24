@@ -1,5 +1,10 @@
 class Api::V1::ReviewsController < ApplicationController
 
+    before :set_review, only:[:show,:update,:destroy]
+    skip_before_action name :authenticate, only: [:index, :show]
+    
+    
+    
     def index
         @reviews = Review.all
         render json: @reviews
@@ -30,6 +35,10 @@ class Api::V1::ReviewsController < ApplicationController
     end
 
     private
+
+    def set_reviews
+        @review = Review.find(params(:id))
+    end
 
     def review_params
         params.require(:review).permit(:body, :movie_id, :user_id, :rating)
