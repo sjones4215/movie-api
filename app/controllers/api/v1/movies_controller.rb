@@ -40,7 +40,7 @@ class Api::V1::MoviesController < ApplicationController
     private
 
     def set_movie
-        @Movie = Movie.find(params(:id))
+        @movie = Movie.find(params(:id))
     end
 
     def movie_params

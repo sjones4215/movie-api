@@ -1,7 +1,28 @@
 Rails.application.routes.draw do
-  resources :reviews
-  resources :movies
-  resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
+  namespace :api, defaults: {format: :json} do 
+    namespace :v1 do
+      namespace :user do
+      post :login 
+      post :create
+      delete :logout
+      get :me
+      end
+      namespace :movie do
+        get :index
+        get :show
+        post :create
+        patch :update
+        delete :destroy
+        get :get_upload_credentials
+
+      end
+      namespace :review do 
+        get :index
+        get :show
+        post :create
+        patch :update
+        delete :destroy
+      end
+    end
+  end
 end
