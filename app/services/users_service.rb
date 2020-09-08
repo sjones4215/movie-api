@@ -1,8 +1,9 @@
-class UserService
+class UsersService
 
     def self.login(email, password)
-        return false unless user = User.new(email: email).try(authenticate: password)
+        return false unless user = User.find_by(email: email).try(:authenticate, password)
         user.generate_token!
+        user
     end
 
     def self.register(email, first_name, last_name, nickname, password, password_confirmation)

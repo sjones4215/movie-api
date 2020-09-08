@@ -13,6 +13,7 @@ class Api::V1::MoviesController < ApplicationController
     end
 
     def create
+        @movie = Movie.new(movie_params)
         if @movie.save
             render json: @movie
         else

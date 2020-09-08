@@ -1,33 +1,31 @@
-class Api::V1::ReviewsController < ApplicationController
+class ReviewsController < ApplicationController
+    before_action :set_review, only:[:show, :update, :destroy]
+    skip_before_action :authenticate, only:[:index, :show]
 
-    before :set_review, only:[:show,:update,:destroy]
-    skip_before_action name :authenticate, only: [:index, :show]
-    
-    
-    
     def index
         @reviews = Review.all
         render json: @reviews
     end
 
     def show
-        render json: @reviews
+        render json: @review
     end
-    
+
     def create
-        @reviews = Review.new(review_params)
+    @review = Review.new(review_params)
         if @review.save
-            render json: status: :created
+            render json: @review, status: :created
         else
             render json: @review.errors, status: :unprocessable_entity
         end
     end
 
     def update
-        if review.update(review_params)
+        if @review.update(review_params)
             render json: @review
         else
             render json: @review.errors, status: :unprocessable_entity
+        end
     end
 
     def destroy
@@ -36,11 +34,12 @@ class Api::V1::ReviewsController < ApplicationController
 
     private
 
-    def set_reviews
-        @review = Review.find(params(:id))
+    def set_review
+        @review = Review.find(params[:id])
     end
 
     def review_params
-        params.require(:review).permit(:body, :movie_id, :user_id, :rating)
+        params.require(:review).permit(:body, :puppy_id, :user_id)
     end
+
 end

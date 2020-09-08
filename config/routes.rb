@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  namespace :api, defaults: {format: :json} do 
+  namespace :api, :defaults {format: :json} do 
     namespace :v1 do
-      namespace :user do
+      namespace :users do
       post :login 
       post :create
       delete :logout
       get :me
       end
-      namespace :movie do
+      
+      namespace :movies do
         get :index
         get :show
         post :create
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
         get :get_upload_credentials
 
       end
-      namespace :review do 
+      namespace :reviews do 
         get :index
         get :show
         post :create
